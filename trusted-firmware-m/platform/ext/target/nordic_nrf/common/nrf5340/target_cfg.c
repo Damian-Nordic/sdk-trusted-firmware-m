@@ -196,6 +196,10 @@ enum tfm_plat_err_t spu_init_cfg(void)
         memory_regions.non_secure_partition_limit);
     spu_regions_sram_config_non_secure(NS_DATA_START, NS_DATA_LIMIT);
 
+#if defined(NS_STORAGE_OFFSET) && defined(NS_STORAGE_LIMIT)
+    spu_regions_flash_config_non_secure(NS_STORAGE_OFFSET, NS_STORAGE_LIMIT);
+#endif
+
     /* Configures veneers region to be non-secure callable */
     spu_regions_flash_config_non_secure_callable(memory_regions.veneer_base,
         memory_regions.veneer_limit - 1);
